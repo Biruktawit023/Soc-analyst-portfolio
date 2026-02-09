@@ -1,0 +1,511 @@
+:root {
+  --matrix-green: #00ff41;
+  --dark-green: #003b00;
+  --terminal-bg: #0a0e0a;
+  --card-bg: #0d1117;
+  --border-green: #1f6e1f;
+  --text-green: #39ff14;
+  --red-alert: #ff0000;
+  --orange-warning: #ff6b00;
+  --blue-info: #00d4ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Courier New", monospace;
+  background-color: var(--terminal-bg);
+  color: var(--matrix-green);
+  overflow-x: hidden;
+}
+
+#matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.15;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--terminal-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-green);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--matrix-green);
+}
+
+.navbar {
+  background-color: rgba(10, 14, 10, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--border-green);
+  padding: 15px 0;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+.navbar-brand {
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--matrix-green) !important;
+  text-shadow: 0 0 10px var(--matrix-green);
+  font-family: "Courier New", monospace;
+}
+
+.navbar-brand::before {
+  content: "> ";
+  color: var(--text-green);
+}
+
+.nav-link-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--matrix-green) !important;
+  font-weight: 700;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  font-family: "Courier New", monospace;
+  transition: all 0.3s;
+}
+
+.nav-link-btn:hover,
+.nav-link-btn.active {
+  border-color: var(--matrix-green);
+  background-color: rgba(0, 255, 65, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+}
+
+.terminal-text {
+  font-family: "Courier New", monospace;
+  color: var(--matrix-green);
+}
+
+.terminal-text::before {
+  content: "$ ";
+  color: var(--text-green);
+}
+
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0;
+  position: relative;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--matrix-green);
+  text-shadow: 0 0 20px var(--matrix-green);
+  margin-bottom: 20px;
+  font-family: "Courier New", monospace;
+}
+
+.typing-effect {
+  font-size: 1.8rem;
+  color: var(--text-green);
+  margin-bottom: 30px;
+  min-height: 60px;
+}
+
+.typing-cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #7fff7f;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.btn-hack {
+  background: linear-gradient(135deg, var(--matrix-green), var(--dark-green));
+  border: 2px solid var(--matrix-green);
+  color: var(--terminal-bg);
+  padding: 15px 35px;
+  font-weight: 900;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+  transition: all 0.3s;
+  font-family: "Courier New", monospace;
+}
+
+.btn-hack:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
+  color: var(--terminal-bg);
+}
+
+.btn-outline-hack {
+  background: transparent;
+  border: 2px solid var(--matrix-green);
+  color: var(--matrix-green);
+  padding: 13px 33px;
+  font-weight: 900;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+  font-family: "Courier New", monospace;
+}
+
+.btn-outline-hack:hover {
+  background-color: rgba(0, 255, 65, 0.1);
+  color: var(--matrix-green);
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+}
+
+.terminal-window {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-green);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+  position: relative;
+}
+
+.terminal-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-green);
+}
+
+.terminal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.btn-red {
+  background-color: var(--red-alert);
+}
+.btn-yellow {
+  background-color: var(--orange-warning);
+}
+.btn-green {
+  background-color: var(--matrix-green);
+}
+
+.terminal-content {
+  font-family: "Courier New", monospace;
+  color: var(--matrix-green);
+  line-height: 1.8;
+}
+
+.terminal-line {
+  margin-bottom: 10px;
+}
+
+.terminal-prompt {
+  color: var(--text-green);
+}
+
+.section-padding {
+  padding: 100px 0;
+  position: relative;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--matrix-green);
+  text-shadow: 0 0 15px var(--matrix-green);
+  font-family: "Courier New", monospace;
+}
+
+.section-title::before {
+  content: "// ";
+  color: var(--text-green);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #7fff7f;
+  font-size: 1.1rem;
+  margin-bottom: 60px;
+}
+
+.skill-card {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-green);
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s;
+  height: 100%;
+}
+
+.skill-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--matrix-green);
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+}
+
+.skill-icon {
+  font-size: 3rem;
+  color: var(--matrix-green);
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px var(--matrix-green);
+}
+
+.skill-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--matrix-green);
+  margin-bottom: 15px;
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  color: #7fff7f;
+}
+
+.skill-list li {
+  margin-bottom: 8px;
+}
+
+.skill-list li::before {
+  content: "> ";
+  color: var(--text-green);
+}
+
+.cert-card {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-green);
+  border-radius: 10px;
+  padding: 25px;
+  transition: all 0.3s;
+  margin-bottom: 20px;
+}
+
+.cert-card:hover {
+  border-color: var(--matrix-green);
+  box-shadow: 0 0 25px rgba(0, 255, 65, 0.3);
+  transform: translateX(10px);
+}
+
+.cert-badge {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--matrix-green), var(--dark-green));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--terminal-bg);
+  font-weight: 900;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+}
+
+.cert-title {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--matrix-green);
+  margin-bottom: 5px;
+}
+
+.cert-issuer {
+  color: #7fff7f;
+  font-size: 0.9rem;
+}
+
+.stat-box {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-green);
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.stat-box:hover {
+  border-color: var(--matrix-green);
+  box-shadow: 0 0 25px rgba(0, 255, 65, 0.3);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--matrix-green);
+  text-shadow: 0 0 15px var(--matrix-green);
+}
+
+.stat-label {
+  color: #7fff7f;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background-color: var(--card-bg) !important;
+  border: 2px solid var(--border-green) !important;
+  color: var(--matrix-green) !important;
+  padding: 15px !important;
+  border-radius: 5px !important;
+  margin-bottom: 20px;
+  font-family: "Courier New", monospace;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--matrix-green) !important;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3) !important;
+}
+
+.contact-form label {
+  color: var(--matrix-green);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.contact-info-box {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-green);
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s;
+  height: 100%;
+}
+
+.contact-info-box:hover {
+  border-color: var(--matrix-green);
+  box-shadow: 0 0 25px rgba(0, 255, 65, 0.3);
+}
+
+.contact-icon {
+  font-size: 2.5rem;
+  color: var(--matrix-green);
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px var(--matrix-green);
+}
+
+.footer {
+  background-color: var(--terminal-bg);
+  padding: 50px 0 30px;
+  border-top: 2px solid var(--border-green);
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-green);
+  border-radius: 5px;
+  color: var(--matrix-green);
+  font-size: 1.3rem;
+  margin: 0 10px;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background-color: var(--matrix-green);
+  color: var(--terminal-bg);
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+}
+
+.badge-critical {
+  background-color: var(--red-alert);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 3px;
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+
+.badge-warning {
+  background-color: var(--orange-warning);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 3px;
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+
+.badge-info {
+  background-color: var(--blue-info);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 3px;
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 992px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .typing-effect {
+    font-size: 1.4rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .typing-effect {
+    font-size: 1.2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-padding {
+    padding: 70px 0;
+  }
+}
